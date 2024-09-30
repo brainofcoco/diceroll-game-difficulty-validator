@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dice Roll - Game Difficulty Validator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        text-align: center;
+      }
+      select,
+      button {
+        padding: 10px;
+        margin-top: 20px;
+        font-size: 16px;
+      }
+      #result {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Game Difficulty Validator</h1>
+
+    <label for="difficulty">Choose difficulty:</label>
+    <select id="difficulty">
+      <option value="soft">Soft 5k - 10k</option>
+      <option value="medium">Medium 10k - 20k</option>
+      <option value="hard">Hard 20k - 30k</option>
+      <option value="pro">Pro 30k - 50k</option>
+    </select>
+
+    <br />
+    <button onclick="runValidation()">Validate</button>
+
+    <div id="result"></div>
+
+    <script>
+      function validateGame(difficulty) {
+        let maxRange;
+
+        switch (difficulty.toLowerCase()) {
+          case 'soft':
+            maxRange = 3;
+            break;
+          case 'medium':
+            maxRange = 5;
+            break;
+          case 'hard':
+            maxRange = 10;
+            break;
+          case 'pro':
+            maxRange = 20;
+            break;
+          case 'soft':
+            maxRange = 3;
+            break;
+          case 'medium':
+            maxRange = 5;
+            break;
+          case 'hard':
+            maxRange = 10;
+            break;
+          case 'pro':
+            maxRange = 20;
+            break;
+          default:
+            throw new Error(
+              "Invalid difficulty. Choose from 'soft', 'medium', 'hard', or 'pro'."
+            );
+        }
+
+        const random1 = Math.floor(Math.random() * maxRange) + 1;
+        const random2 = Math.floor(Math.random() * maxRange) + 1;
+
+        return { random1, random2, isMatch: random1 === random2 };
+      }
+
+      function runValidation() {
+        const difficulty = document.getElementById('difficulty').value;
+        const resultDiv = document.getElementById('result');
+
+        const { random1, random2, isMatch } = validateGame(difficulty);
+
+        resultDiv.innerHTML = `
+        Difficulty: ${difficulty.toUpperCase()}<br>
+        First Number: ${random1}<br>
+        Second Number: ${random2}<br>
+        Result: ${isMatch ? 'Match! 🎉' : 'No Match 😞'}
+      `;
+      }
+    </script>
+  </body>
+</html>
